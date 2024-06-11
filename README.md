@@ -1,21 +1,9 @@
-toPDF es un proyecto de practica para crear archivos .PDF
+toPDF es un proyecto de practica hecho con React, Javascript y Vite, en el cual el objetivo es lograr convertir un archivo con extensión .HEIC a .PDF.
 
-10/06/2024 00:00 - Comence a implementar la solución que me propuso chatGPT utilizando jsPDF y file-type.
+Se agregaron las librerias "jsPDF" y "HEIC2any".
 
-10/06/2024 07:06 - Hice varias pruebas y le di bastantes vueltas al código.
-Primero probe con los paquetes "jspdf" y "file-type" siguiendo el ejemplo de chatGPT, pero luego de batallar bastante, no lo pude hacer funcionar (me daba problemas con el import de file-type).
-
-Probe implementado esta solución:
-fuente: https://www.youtube.com/watch?v=jpYdT6OzsUs&t=252s&ab_channel=CodingShiksha
-
-Casi pude lograrlo, pero descubrí que jsPDF no tiene soporte nativo para archivos heic (y parece que la gran mayoría de las librerías para convertir a PDF tampoco). jsPDF me dice que proporcione un pluggin.
-
-Otra forma seria importar otra librería, que si me permita convertir el .heic a .jpeg por ejemplo y luego usar jsPDF.
-
-La sugerencia que me había dado chatGPT, fue usar la libreria file-type, para verificar el tipo de dato del archivo y en caso que sea .heic (este si lo reconoce) convertirlo a un ArrayBuffer (también le llaman "Blob"), luego a JPEG, y finalmente lo guarda como .pdf. Vamos a probar eso.
-
-10/06/2024 07:32 - Parece que no puedo convertirlo directamente a heic "forzandolo".
-Mañana probare con la librería heic2any.
+Actualmente se logro cumplir con el objetivo.
+El usuario puede seleccionar un archivo (este debe ser .HEIC) y tras presionar el boton "Convertir a PDF", se genera el archivo "output.pdf" en la carptea de "descargas".
 
 ---
 

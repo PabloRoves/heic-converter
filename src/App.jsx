@@ -2,45 +2,90 @@ import React from 'react';
 import { Component } from 'react';
 import { jsPDF } from 'jspdf';
 import './App.css'
+import heic2any from 'heic2any';
 
 
 class App extends Component{
   state = {
     imgData : '',
-    dato : 3,
   }
 
   constructor(){
     super();
   }
 
-  handleFileChange = async(e) => {
-    const {imgData, dato} = this.state;
+  handleFileChange = (e) => {
+    const {imgData} = this.state;
     const img = e.target.files[0];
     const fileReader = new FileReader();
     fileReader.onloadend = () => {
       //console.log(this);
       this.setState({imgData : fileReader.result});      
     }
-    console.log(img);
+    //console.log(img);
     fileReader.readAsDataURL(img);
   }
 
+  /*createPDF = () => {
+    const { imgData } = this.state;
+    //console.log(imgData);
+    fetch(imgData)
+    .then((res) => res.blob())
+    .then((blob) => heic2any({ blob }))
+    .then((conversionResult) =>{
+      console.log(conversionResult);
+      let url = URL.createObjectURL(conversionResult)
+      const link = document.createElement('a');
+      link.href = url;
+      link.
+      
+      document.getElementById("target").innerHTML = `<a target="_blank" href='${url}'><img src="${url}"></a>`;
+      let blob = conversionResult;
+      const doc = new jsPDF();
+      const imgWidth = doc.internal.pageSize.getWidth();
+      const imgHeight = doc.internal.pageSize.getHeight();
+      doc.addImage(blob, 'pjeg',0,0, imgWidth, imgHeight);
+      doc.save("output.pdf");
+    })
+    .catch((e) => {
+      console.log(e)
+      //aca va como manejar captura de errores
+    });
+  }*/
+
   createPDF = () => {
-    const {imgData, dato } = this.state;
-    console.log(imgData)
-    const doc = new jsPDF();
-    const imgWidth = doc.internal.pageSize.getWidth();
-    const imgHeight = doc.internal.pageSize.getHeight();
-    //console.log(this.arrayBufferToBase64(imgData));
+    const { imgData } = this.state;
+    //console.log(imgData);
+    fetch(imgData)
+    .then((res) => res.blob())
+    .then((blob) => 
+      heic2any({ 
+        blob,
+      toType: "image/jpeg",
+    quality: 0.5 }))
+    .then((conversionResult) =>{
+      console.log(conversionResult);
+      let url = URL.createObjectURL(conversionResult)
+      document.getElementById("target").innerHTML = `<a target="_blank" href='${url}'><img src="${url}"></a>`;
+      let blob = conversionResult;
+      const doc = new jsPDF();
+      const imgWidth = doc.internal.pageSize.getWidth();
+      const imgHeight = doc.internal.pageSize.getHeight();
+      doc.addImage(url, 'pjeg',0,0, imgWidth, imgHeight);
+      alert("hola");
+      doc.save("output.pdf");
+    })
+    .catch((e) => {
+      console.log(e)
+      //aca va como manejar captura de errores
+    });
+  } 
+
+
+  //console.log(this.arrayBufferToBase64(imgData));
     //doc.addImage(`data:image/jpeg;base64,${this.arrayBufferToBase64(imgData)}`, 'JPG',0,0, imgWidth, imgHeight);
     //doc.addImage(`data:image/jpeg;base64,${imgData}`, 'JPEG',0,0, imgWidth, imgHeight);
-    doc.addImage(imgData, 'jpg',0,0, imgWidth, imgHeight);
     
-    doc.save("output.pdf");
-
-  }
-
   arrayBufferToBase64 = (buffer) => {
     console.log("buffer: " + buffer);
     let binary = '';
@@ -62,6 +107,7 @@ class App extends Component{
         <div className="card">
           <input type="file" onChange={this.handleFileChange} accept=".heic" />
           <button onClick={this.createPDF}>Create PDF</button>
+          <div id='target'></div>
         </div>
       </>
     )
