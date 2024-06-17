@@ -10,35 +10,24 @@ class App extends Component {
   };
 
   handleFileChange = (e) => {
-    //console.log("ocurre handleFileChange");
     let img = e.target.files[0];
-    //console.log(img);
     if (!img) return;
-    //console.log(img);
     const imgname = img === undefined ? "" : img.name;
-    //console.log(imgname);
     const extension = imgname.substr(imgname.length - 5);
     if (extension !== ".heic") {
-      alert("No eligio un archivo .heic");
+      alert("Solo se pueden cargar archivo .heic");
       img = null;
       e.target.value = null;
-      //console.log(img);
-      //console.log(e.target.files[0]);
-
-      console.log("no sigo");
       return;
     }
     this.cargoImagen(img);
   };
 
   cargoImagen(img) {
-    console.log("cargo imagen");
     const { imgData } = this.state;
     const fileReader = new FileReader();
     fileReader.onloadend = () => {
-      this.setState({ imgData: fileReader.result }, () => {
-        console.log(this.state.imgData);
-      });
+      this.setState({ imgData: fileReader.result }, () => {});
     };
     fileReader.readAsDataURL(img);
   }
