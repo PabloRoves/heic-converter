@@ -1,8 +1,10 @@
-#toPDF
+# toPDF
 
-toPDF es un proyecto de practica hecho con React, Javascript y Vite, en el cual el objetivo es lograr convertir un archivo con extensión .HEIC a .PDF.
+**toPDF** es una aplicación desarrollada con React, JavaScript y Vite, la cual permite convertir archivos con extensión ".HEIC" a ".PDF" manteniendo una resolución aceptable.
 
-Se agregaron las librerias "jsPDF" y "HEIC2any".
+Se utilizan las librerías **jsPDF** y **HEIC2any**.
 
-Actualmente se logro cumplir con el objetivo.
-El usuario puede seleccionar un archivo (este debe ser .HEIC) y tras presionar el boton "Convertir a PDF", se genera el archivo "output.pdf" en la carptea de "descargas".
+Características:
+
+- Permite seleccionar un archivo a la vez.
+- Al presionar el botón "Convertir a PDF", se genera el archivo "output.pdf" en la carpeta de descargas del dispositivo.
