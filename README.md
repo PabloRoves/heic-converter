@@ -7,4 +7,4 @@ Se utilizan las librerías **jsPDF** y **HEIC2any**.
 Características:
 
 - Permite seleccionar un archivo a la vez.
-- Al presionar el botón "Convertir a PDF", se genera el archivo "output.pdf" en la carpeta de descargas del dispositivo.
+- Al presionar el botón "Convertir a PDF", se convierte el archivo seleccionado a PDF manteniendo el mismo nombre.
