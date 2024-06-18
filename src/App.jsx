@@ -6,34 +6,47 @@ import heic2any from "heic2any";
 
 class App extends Component {
   state = {
-    imgData: "",
+    imgData: null,
+    imgName: "",
   };
 
   handleFileChange = (e) => {
-    let img = e.target.files[0];
-    if (!img) return;
-    const imgname = img === undefined ? "" : img.name;
-    const extension = imgname.substr(imgname.length - 5);
-    if (extension !== ".heic") {
+    this.setState({ imgData: null, imgName: "" });
+    let file = e.target.files[0];
+    if (!file) return;
+    const imgName = file === undefined ? "" : file.name;
+    if (this.getExtension(imgName) !== ".heic") {
       alert("Solo se pueden cargar archivo .heic");
-      img = null;
       e.target.value = null;
       return;
     }
-    this.cargoImagen(img);
+    this.loadImage(file);
   };
 
-  cargoImagen(img) {
-    const { imgData } = this.state;
+  removeExtension(imgName) {
+    return imgName.substr(0, imgName.length - 5);
+  }
+
+  getExtension(imgName) {
+    return imgName.substr(imgName.length - 5);
+  }
+
+  loadImage(img) {
+    const name = this.removeExtension(img.name);
+    this.setState({ imgName: name });
+
     const fileReader = new FileReader();
+    fileReader.readAsDataURL(img);
     fileReader.onloadend = () => {
       this.setState({ imgData: fileReader.result }, () => {});
     };
-    fileReader.readAsDataURL(img);
   }
 
   createPDF = () => {
-    const { imgData } = this.state;
+    const { imgData, imgName } = this.state;
+
+    if (imgData == null) return;
+
     fetch(imgData)
       .then((res) => res.blob())
       .then((blob) =>
@@ -44,19 +57,18 @@ class App extends Component {
         })
       )
       .then((conversionResult) => {
-        console.log(conversionResult);
         let url = URL.createObjectURL(conversionResult);
         let blob = conversionResult;
         const doc = new jsPDF();
         const imgWidth = doc.internal.pageSize.getWidth();
         const imgHeight = doc.internal.pageSize.getHeight();
         doc.addImage(url, "pjeg", 0, 0, imgWidth, imgHeight);
-        doc.save("output.pdf");
+        doc.save(imgName + ".pdf");
         URL.revokeObjectURL(url);
       })
       .catch((e) => {
         console.log(e);
-        alert("¿Ocurrio un error, revisa la consola!");
+        alert("¡Ocurrio un error, revisa la consola!");
       });
   };
 
