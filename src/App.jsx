@@ -1,4 +1,3 @@
-import React from "react";
 import { Component } from "react";
 import { jsPDF } from "jspdf";
 import "./App.css";
@@ -15,7 +14,7 @@ class App extends Component {
     let file = e.target.files[0];
     if (!file) return;
     const imgName = file === undefined ? "" : file.name;
-    if (this.getExtension(imgName) !== ".heic") {
+    if (this.getExtension(imgName).toLowerCase() !== ".heic") {
       alert("Solo se pueden cargar archivo .heic");
       e.target.value = null;
       return;
@@ -58,7 +57,7 @@ class App extends Component {
       )
       .then((conversionResult) => {
         let url = URL.createObjectURL(conversionResult);
-        let blob = conversionResult;
+        //let blob = conversionResult;
         const doc = new jsPDF();
         const imgWidth = doc.internal.pageSize.getWidth();
         const imgHeight = doc.internal.pageSize.getHeight();
