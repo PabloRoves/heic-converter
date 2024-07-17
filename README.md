@@ -2,13 +2,7 @@
 
 This React application allows you to easily convert HEIC images (High-Efficiency Image Container) to PDF documents. It utilizes the heic2any library for seamless conversion and the jsPDF library for PDF generation.
 
-## Features
-
-- **HEIC Support:** Uploads and converts HEIC images to a more widely compatible format (JPEG).
-- **PDF Generation:** Creates a PDF document containing the converted image.
-- **Error Handling:** Provides informative error messages in the console for troubleshooting.
-
-## Installation
+## Installation and Setup
 
 1. **Prerequisites:** Ensure you have Node.js (version 16 or later recommended) and npm (or yarn) installed on your system.
 
@@ -35,6 +29,12 @@ This will typically open your default web browser and navigate to http://localho
 2. **Select an HEIC Image:** Click the "Choose File" button and select an HEIC image from your local storage.
 
 3. **Generate PDF:** Once the image is loaded, click the "Create PDF" button. The application will convert the image to JPEG and generate a PDF document with the same name as the image, appended with ".pdf".
+
+## Features
+
+- **HEIC Support:** Uploads and converts HEIC images to a more widely compatible format (JPEG).
+- **PDF Generation:** Creates a PDF document containing the converted image.
+- **Error Handling:** Provides informative error messages in the console for troubleshooting.
 
 ## Additional Notes
 
