@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { jsPDF } from "jspdf";
+//import { jsPDF } from "jspdf";
 import "./App.css";
 import heic2any from "heic2any";
 
@@ -41,7 +41,7 @@ class App extends Component {
     };
   }
 
-  createPDF = () => {
+  createJPEG = () => {
     const { imgData, imgName } = this.state;
 
     if (imgData == null) return;
@@ -58,11 +58,13 @@ class App extends Component {
       .then((conversionResult) => {
         let url = URL.createObjectURL(conversionResult);
         //let blob = conversionResult;
-        const doc = new jsPDF();
-        const imgWidth = doc.internal.pageSize.getWidth();
-        const imgHeight = doc.internal.pageSize.getHeight();
-        doc.addImage(url, "pjeg", 0, 0, imgWidth, imgHeight);
-        doc.save(imgName + ".pdf");
+        //console.log(url);
+        //const doc = new jsPDF();
+        //const imgWidth = doc.internal.pageSize.getWidth();
+        //const imgHeight = doc.internal.pageSize.getHeight();
+        //doc.addImage(url, "pjeg", 0, 0, imgWidth, imgHeight);
+        //doc.save(imgName + ".pdf");
+        this.downloadURI(url, imgName);
         URL.revokeObjectURL(url);
       })
       .catch((e) => {
@@ -71,13 +73,22 @@ class App extends Component {
       });
   };
 
+  downloadURI(uri, name) {
+    const link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   render() {
     return (
       <>
-        <h1>toPDF</h1>
+        <h1>toJPEG</h1>
         <div className='card'>
           <input type='file' onChange={this.handleFileChange} accept='.heic' />
-          <button onClick={this.createPDF}>Create PDF</button>
+          <button onClick={this.createJPEG}>Create JPEG</button>
         </div>
       </>
     );
