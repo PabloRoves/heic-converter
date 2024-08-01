@@ -1,6 +1,6 @@
-# heic-converter: Convert HEIC Images to JPEG
+# heic-converter: Convert HEIC Images to JPEG or PDF
 
-This React application allows you to easily convert HEIC images (High-Efficiency Image Container) to jpeg. It utilizes the heic2any library for seamless conversion.
+This React application allows you to easily convert HEIC images (High-Efficiency Image Container) to jpeg or pdf. It utilizes the heic2any library for seamless conversion.
 
 ## Installation and Setup
 
@@ -28,18 +28,9 @@ This will typically open your default web browser and navigate to http://localho
 
 2. **Select an HEIC Image:** Click the "Choose File" button and select an HEIC image from your local storage.
 
-3. **Generate jpeg:** Once the image is loaded, click "Create JPEG" button. The application will convert the HEIC image to JPEG image with the same name and extension ".jpeg".
+3. **Select the output file type jpeg or pdf:** Select between the options.
 
-## Features
-
-- **HEIC Support:** Uploads and converts HEIC images to a more widely compatible format (JPEG).
-- **JPEG Generation:** Creates a JPEG converted image.
-- **Error Handling:** Provides informative error messages in the console for troubleshooting.
-
-## Additional Notes
-
-- The converted JPEG file will be saved in your default download location.
-- This application is intended for development and demonstration purposes. Consider performance optimization and security measures for production deployments.
+4. **Convert:** Once the image is loaded, click "Convert" button. The application will convert the HEIC image to JPEG/PDF with the same name and download the file in your default download location.
 
 ## Technologies Used
 
